@@ -24,22 +24,23 @@ namespace MathForGames
             _name = name;
         }
 
-        public void Start()
+        public virtual void Start()
         {
 
         }
 
-        public void Update()
+        public virtual void Update()
         {
-
+            _position.X = Position.X + 1;
         }
 
-        public void Draw()
+        public virtual void Draw()
         {
-
+            Console.SetCursorPosition((int)Position.X, (int)Position.Y);
+            Console.Write(_icon);
         }
 
-        public void End()
+        public virtual void End()
         {
 
         }
