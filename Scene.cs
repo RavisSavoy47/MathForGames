@@ -19,7 +19,7 @@ namespace MathForGames
         /// <summary>
         /// Calls start for all actors in the actors array
         /// </summary>
-        public void Start()
+        public virtual void Start()
         {
             for (int i = 0; i < _actors.Length; i++)
             {
@@ -30,7 +30,7 @@ namespace MathForGames
         /// <summary>
         /// Calls update for every actor in the scene. Calls start for the actor if it hasn't been called.
         /// </summary>
-        public void Update()
+        public virtual void Update()
         {
             for (int i = 0; i < _actors.Length; i++)
             {
@@ -41,7 +41,7 @@ namespace MathForGames
             }
         }
 
-        public void Draw()
+        public virtual void Draw()
         {
             for (int i = 0; i < _actors.Length; i++)
             {
@@ -49,7 +49,7 @@ namespace MathForGames
             }
         }
 
-        public void End()
+        public virtual void End()
         {
             for (int i = 0; i < _actors.Length; i++)
             {
@@ -61,7 +61,7 @@ namespace MathForGames
         /// Adds an actor the scenes list of actors.
         /// </summary>
         /// <param name="actor">The actor to add to the scene</param>
-        public void AddActor(Actor actor)
+        public virtual void AddActor(Actor actor)
         {
             //Create a new temp arary larger than the current one
             Actor[] tempArray = new Actor[_actors.Length + 1];
@@ -84,7 +84,7 @@ namespace MathForGames
         /// </summary>
         /// <param name="actor">Teh actor to remove</param>
         /// <returns>False if the actor was not in the scene array</returns>
-        public bool RemoveActor(Actor actor)
+        public virtual bool RemoveActor(Actor actor)
         {
             //Create a variable to store if the removal was successful
             bool actorRemoved = false;
