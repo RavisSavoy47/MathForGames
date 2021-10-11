@@ -48,6 +48,8 @@ namespace MathForGames
             _currentSceneIndex = AddScene(scene);
 
             _scenes[_currentSceneIndex].Start();
+
+            Console.CursorVisible = false;
         }
 
         /// <summary>
@@ -63,8 +65,32 @@ namespace MathForGames
         /// </summary>
         private void Draw()
         {
-            Console.Clear();
+            //Clear the stuff that was on the screen in the last frame
+            _buffer = new Icon[Console.WindowWidth, Console.WindowHeight - 1];
+
+            //Reset the cursor position to the top so the previous screen is drawn over
+            Console.SetCursorPosition(0, 0);
+
+            //Adds all actors icons to buffer
             _scenes[_currentSceneIndex].Draw();
+
+            //Iterate through buffer
+            for (int y = 0; y < _buffer.GetLength(1); y++)
+            {
+                for(int x = 0; x < _buffer.GetLength(0); x++)
+                {
+                    if (_buffer[x, y].Symbol == '\0')
+                        _buffer[x, y].Symbol = ' ';
+
+                    //Set console texxt color to be color of item at buffer
+                    Console.ForegroundColor = _buffer[x, y].Color;
+                    //Print the symbol of the item in the buffer
+                    Console.Write(_buffer[x, y].Symbol);
+                }
+
+                //Skip a line once the end of the row has been reached
+                Console.WriteLine();
+            }
         }
 
         /// <summary>
@@ -101,12 +127,23 @@ namespace MathForGames
             return _scenes.Length -1;
         }
 
-        public static void Render(Icon icon, Vector2 positison)
+        /// <summary>
+        /// Adds the icon to the buffer to print to the screen in the next draw call.
+        /// Prints the icon at the given position in th ebuffer.
+        /// </summary>
+        /// <param name="icon">The icon to draw</param>
+        /// <param name="positison">The position of the icon in the buffer</param>
+        /// <returns>Falseif teh position is outside the bounds of the buffer</returns>returns>
+        public static bool Render(Icon icon, Vector2 positison)
         {
+            //If the position is out of bounds..
             if (positison.X < 0 || positison.X >= _buffer.GetLength(0) || positison.Y < 0 || positison.Y >= _buffer.GetLength(1))
-                return;
+                //..return false
+                return false;
 
-
+            //Set th ebuffer at the index of th egiven position to be teh icon
+            _buffer[(int)positison.X, (int)positison.Y] = icon;
+            return true;
         }
     }
 }

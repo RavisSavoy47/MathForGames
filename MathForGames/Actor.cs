@@ -51,10 +51,7 @@ namespace MathForGames
 
         public virtual void Draw()
         {
-            Console.SetCursorPosition((int)Position.X, (int)Position.Y);
-            Console.ForegroundColor = _icon.Color;
-            Console.Write(_icon.Symbol);
-            Console.ResetColor();
+            Engine.Render(_icon, Position);
         }
 
         public virtual void End()
