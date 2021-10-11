@@ -32,6 +32,9 @@ namespace MathForGames
             set { _position = value; }
         }
 
+        public Actor(char icon, float x, float y, string name = "Actor", ConsoleColor color = ConsoleColor.White) :
+         this(icon, new Vector2 { X = x, Y = y }, name, color) {}       
+
         public Actor(char icon, Vector2 position, string name = "Actor", ConsoleColor color = ConsoleColor.White)
         {
             _icon = new Icon { Symbol = icon, Color = color };
@@ -46,7 +49,7 @@ namespace MathForGames
 
         public virtual void Update()
         {
-            _position.X = Position.X + 1;
+            
         }
 
         public virtual void Draw()

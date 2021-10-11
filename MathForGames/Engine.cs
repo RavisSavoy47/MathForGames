@@ -128,6 +128,21 @@ namespace MathForGames
         }
 
         /// <summary>
+        /// Gets the key in the input stream
+        /// </summary>
+        /// <returns>teh key that was pressed</returns>
+        public static ConsoleKey GetNextKey()
+        {
+            //If there is no key being pressed
+            if (!Console.KeyAvailable)
+                //..return
+                return 0;
+
+            //return teh current key being pressed
+            return Console.ReadKey(true).Key;
+        }
+
+        /// <summary>
         /// Adds the icon to the buffer to print to the screen in the next draw call.
         /// Prints the icon at the given position in th ebuffer.
         /// </summary>
