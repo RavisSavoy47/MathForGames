@@ -16,24 +16,45 @@ namespace MathForGames
             _actors = new Actor[0];
         }
 
+        /// <summary>
+        /// Calls start for all actors in the actors array
+        /// </summary>
         public void Start()
         {
-             
+            for (int i = 0; i < _actors.Length; i++)
+            {
+                _actors[i].Start();
+            }
         }
 
+        /// <summary>
+        /// Calls update for every actor in the scene. Calls start for the actor if it hasn't been called.
+        /// </summary>
         public void Update()
         {
+            for (int i = 0; i < _actors.Length; i++)
+            {
+                if(!_actors[i].Started)
+                _actors[i].Start();
 
+                _actors[i].Update();
+            }
         }
 
         public void Draw()
         {
-
+            for (int i = 0; i < _actors.Length; i++)
+            {
+                _actors[i].Draw();
+            }
         }
 
         public void End()
         {
-
+            for (int i = 0; i < _actors.Length; i++)
+            {
+                _actors[i].End();
+            }
         }
 
         /// <summary>
