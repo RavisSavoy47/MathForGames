@@ -39,9 +39,9 @@ namespace MathForGames
         private void Start()
         {
             Scene scene = new Scene();
-            Actor actor = new Actor('P', new MathLibrary1.Vector2 { X = 0, Y = 0 }, "Actor1", ConsoleColor.Yellow);
+            Actor actor = new Actor('P', 0, 0, "Actor1", ConsoleColor.Yellow);
             Actor actor2 = new Actor('A', new MathLibrary1.Vector2 { X = 10, Y = 4 }, "Actor2", ConsoleColor.Blue);
-
+            Player player = new Player('@', 5, 5, 1, "Player", ConsoleColor.DarkMagenta);
             scene.AddActor(actor2);
             scene.AddActor(actor);
 
