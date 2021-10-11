@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using MathLibary;
+using MathLibrary1;
 
 namespace MathForGames
 {

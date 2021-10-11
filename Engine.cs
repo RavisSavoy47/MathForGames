@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace MathForGames
 {
@@ -35,7 +36,7 @@ namespace MathForGames
         /// </summary>
         private void Start()
         {
-            _actor = new Actor('P', new MathLibary.Vector2 { X = 0, Y = 0 });
+            _actor = new Actor('P', new MathLibrary1.Vector2 { X = 0, Y = 0 });
             _scenes[_currentSceneIndex].Start();
         }
 
@@ -52,6 +53,7 @@ namespace MathForGames
         /// </summary>
         private void Draw()
         {
+            Console.Clear();
             _scenes[_currentSceneIndex].Draw();
         }
 
