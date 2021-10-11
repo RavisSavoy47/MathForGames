@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using MathLibrary1;
 
 namespace MathForGames
 {
@@ -10,6 +11,7 @@ namespace MathForGames
         private static bool _applicationShouldClose = false;
         private static int _currentSceneIndex;
         private Scene[] _scenes = new Scene[0];
+        private static Icon[,] _buffer;
 
         /// <summary>
         /// Called to begin the application
@@ -37,8 +39,10 @@ namespace MathForGames
         private void Start()
         {
             Scene scene = new Scene();
-            Actor actor = new Actor('P', new MathLibrary1.Vector2 { X = 0, Y = 0 });
+            Actor actor = new Actor('P', new MathLibrary1.Vector2 { X = 0, Y = 0 }, "Actor1", ConsoleColor.Yellow);
+            Actor actor2 = new Actor('A', new MathLibrary1.Vector2 { X = 10, Y = 4 }, "Actor2", ConsoleColor.Blue);
 
+            scene.AddActor(actor2);
             scene.AddActor(actor);
 
             _currentSceneIndex = AddScene(scene);
@@ -95,6 +99,14 @@ namespace MathForGames
 
             //Return the last index
             return _scenes.Length -1;
+        }
+
+        public static void Render(Icon icon, Vector2 positison)
+        {
+            if (positison.X < 0 || positison.X >= _buffer.GetLength(0) || positison.Y < 0 || positison.Y >= _buffer.GetLength(1))
+                return;
+
+
         }
     }
 }
