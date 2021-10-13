@@ -56,7 +56,7 @@ namespace MathForGames
         }
 
         /// <summary>
-        /// Called everytime the game loops
+        /// Called everytime the game loops.
         /// </summary>
         private void Update()
         {
