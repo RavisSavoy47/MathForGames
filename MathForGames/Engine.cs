@@ -13,6 +13,7 @@ namespace MathForGames
         private Scene[] _scenes = new Scene[0];
         private static Icon[,] _buffer;
 
+
         /// <summary>
         /// Called to begin the application
         /// </summary>
@@ -26,6 +27,7 @@ namespace MathForGames
             {
                 Update();
                 Draw();
+
                 Thread.Sleep(50);
             }
 
@@ -41,7 +43,7 @@ namespace MathForGames
             Scene scene = new Scene();
             Actor actor = new Actor('P', 0, 0, "Actor1", ConsoleColor.Yellow);
             Actor actor2 = new Actor('A', new MathLibrary1.Vector2 { X = 10, Y = 4 }, "Actor2", ConsoleColor.Blue);
-            Player player = new Player('@', 5, 5, 1, "Player", ConsoleColor.DarkMagenta);
+            Player player = new Player('@', 5, 5, 3, "Player", ConsoleColor.DarkMagenta);
             scene.AddActor(player);
             scene.AddActor(actor2);
             scene.AddActor(actor);
@@ -163,6 +165,11 @@ namespace MathForGames
             //Set th ebuffer at the index of th egiven position to be teh icon
             _buffer[(int)positison.X, (int)positison.Y] = icon;
             return true;
+        }
+
+        public static void CloseApplication()
+        {
+            _applicationShouldClose = true;
         }
     }
 }
