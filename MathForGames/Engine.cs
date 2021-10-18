@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using MathLibrary1;
+using Raylib_cs;
 
 namespace MathForGames
 {
@@ -23,7 +24,7 @@ namespace MathForGames
             Start();
 
             //loop until the application is told to close
-            while(!_applicationShouldClose)
+            while(!Raylib.WindowShouldClose())
             {
                 Update();
                 Draw();
@@ -40,6 +41,9 @@ namespace MathForGames
         /// </summary>
         private void Start()
         {
+            //Create a window using raylib
+            Raylib.InitWindow(800, 450, "Math For Games");
+
             Scene scene = new Scene();
             Actor actor = new Actor('P', 0, 0, "Actor1", ConsoleColor.Yellow);
             Actor actor2 = new Actor('A', new MathLibrary1.Vector2 { X = 10, Y = 4 }, "Actor2", ConsoleColor.Blue);
@@ -49,9 +53,7 @@ namespace MathForGames
             scene.AddActor(actor);
 
             _currentSceneIndex = AddScene(scene);
-
             _scenes[_currentSceneIndex].Start();
-
             Console.CursorVisible = false;
         }
 
