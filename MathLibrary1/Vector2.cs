@@ -7,6 +7,11 @@ namespace MathLibrary1
         public float Y;
         public float X;
 
+        public Vector2(float x, float y)
+        {
+            X = x;
+            Y = y;
+        }
         /// <summary>
         /// Adds the x value of the second vector to the first, and adds the y vaqlue to the first
         /// </summary>
