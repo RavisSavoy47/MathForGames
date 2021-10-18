@@ -34,7 +34,7 @@ namespace MathForGames
 
         public Icon Icon
         {
-            get { return _icon; };
+            get { return _icon; }
         }
 
         public Actor(char icon, float x, float y, string name = "Actor", ConsoleColor color = ConsoleColor.White) :
