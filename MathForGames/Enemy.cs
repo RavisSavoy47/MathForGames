@@ -26,7 +26,7 @@ namespace MathForGames
             set { _velocity = value; }
         }
 
-        public Enemy(float x, float y, float z, float speed, float maxSightDistance, float maxViewAngle,
+        public Enemy(float x, float y, float z, float speed, float maxSightDistance, float maxViewAngle, 
             Actor target, string name = "Enemy", Shape shape = Shape.CUBE)
             : base(x, y, z, name, shape)
         {
@@ -54,7 +54,7 @@ namespace MathForGames
                 LocalPosition += Velocity;
 
                 //if (Velocity.Magnitude > 0)
-                //Forward = Velocity.Normalized;
+                    //Forward = Velocity.Normalized;
             }
 
 
@@ -84,7 +84,7 @@ namespace MathForGames
 
             float dotProduct = Vector3.DotProduct(directionOfTarget, Forward);
 
-            return Math.Acos(dotProduct) < _maxViewAngle && distanceOfTarget < _maxSightDistance;
+            return Math.Acos(dotProduct) < _maxViewAngle &&  distanceOfTarget < _maxSightDistance;
 
         }
 
@@ -94,4 +94,3 @@ namespace MathForGames
         }
     }
 }
-

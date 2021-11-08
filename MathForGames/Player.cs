@@ -25,7 +25,7 @@ namespace MathForGames
             set { _velocity = value; }
         }
 
-        public Player(float x, float y, float z, float speed, string name = "Player", Shape shape = Shape.CUBE)
+        public Player(float x, float y, float z, float speed, string name = "Player", Shape shape = Shape.CUBE) 
             : base(x, y, z, name, shape)
         {
             _speed = speed;
@@ -53,7 +53,7 @@ namespace MathForGames
             //Gives the bullets a cooldown timer
             _timer += deltaTime;
 
-            if (bulletDirectionX != 0 && _timer >= .5 || bulletDirectionZ != 0 && _timer >= .5)
+            if (bulletDirectionX != 0 && _timer >= .5 || bulletDirectionZ != 0 && _timer >= .5 )
             {
                 Bullet bullet = new Bullet(LocalPosition.X, LocalPosition.Y, LocalPosition.Z, bulletDirectionX, bulletDirectionZ, 10, "Bullet");
                 bullet.SetScale(1, 1, 1);
@@ -77,7 +77,7 @@ namespace MathForGames
             LocalPosition += Velocity;
 
             base.Update(deltaTime, currentScene);
-
+           
         }
 
         /// <summary>

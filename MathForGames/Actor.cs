@@ -44,7 +44,7 @@ namespace MathForGames
         public Vector3 LocalPosition
         {
             get { return new Vector3(_translation.M03, _translation.M13, _translation.M23); }
-            set
+            set 
             {
                 SetTranslation(value.X, value.Y, value.Z);
             }
@@ -98,26 +98,26 @@ namespace MathForGames
 
         public Vector3 Size
         {
-            get
+            get 
             {
                 float xScale = new Vector3(_scale.M00, _scale.M10, _scale.M20).Magnitude;
                 float yScale = new Vector3(_scale.M01, _scale.M11, _scale.M21).Magnitude;
                 float zScale = new Vector3(_scale.M02, _scale.M12, _scale.M22).Magnitude;
-                return new Vector3(xScale, yScale, zScale);
+                return new Vector3(xScale, yScale, zScale); 
             }
             set { SetScale(value.X, value.Y, value.Z); }
         }
 
         public Vector3 Forward
         {
-            get { return new Vector3(_rotation.M02, _rotation.M12, _rotation.M22); }
-            set
-            {
+            get { return new Vector3 (_rotation.M02, _rotation.M12, _rotation.M22); }
+            set 
+            { 
                 Vector3 point = value.Normalized + WorldPosition;
                 LookAt(point);
             }
         }
-
+        
         public Collider Collider
         {
             get { return _collider; }
@@ -125,8 +125,7 @@ namespace MathForGames
         }
 
         public Actor(float x, float y, float z, string name = "Actor", Shape shape = Shape.CUBE) :
-         this(new Vector3 { X = x, Y = y, Z = z }, name, shape)
-        { }
+         this(new Vector3 { X = x, Y = y, Z = z },name, shape ) {}       
 
         public Actor(Vector3 position, string name = "Actor", Shape shape = Shape.CUBE)
         {
@@ -134,7 +133,7 @@ namespace MathForGames
             _name = name;
             _shape = shape;
         }
-
+       
         public void UpdateTransforms()
         {
             _localTransform = _translation * _rotation * _scale;
@@ -214,7 +213,7 @@ namespace MathForGames
         }
 
         public virtual void Update(float deltaTime, Scene currentScene)
-        {
+        {  
             Console.WriteLine(_name + ": " + LocalPosition.X + ", " + LocalPosition.Y);
             UpdateTransforms();
         }
@@ -233,8 +232,8 @@ namespace MathForGames
                     Raylib.DrawSphere(startPos, Size.X, ShapeColor);
                     break;
             }
-            //Draw a line to represent the actors forward vector
-            Raylib.DrawLine3D(startPos, endPos, Color.YELLOW);
+                //Draw a line to represent the actors forward vector
+                Raylib.DrawLine3D(startPos, endPos, Color.YELLOW);
         }
 
         public virtual void End()
@@ -344,7 +343,7 @@ namespace MathForGames
             Vector3 newXAxis = new Vector3(1, 0, 0);
 
             //If the direction vector is parallel to the alignAxis vector..
-            if (Math.Abs(direction.Y) > 0 && direction.X == 0 && direction.Z == 0)
+            if(Math.Abs(direction.Y) > 0 && direction.X == 0 && direction.Z == 0)
             {
                 //...set the alignAxis vector to point to the right
                 alignAxis = new Vector3(1, 0, 0);

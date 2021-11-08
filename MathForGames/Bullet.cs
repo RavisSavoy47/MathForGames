@@ -39,8 +39,8 @@ namespace MathForGames
         /// <param name="currentScene"></param>
         public override void Update(float deltaTime, Scene currentScene)
         {
-
-            Vector3 moveDirection = new Vector3(_velocity.X, _velocity.Y, _velocity.Z);
+            
+            Vector3 moveDirection = new Vector3 (_velocity.X, _velocity.Y, _velocity.Z);
 
             Velocity = moveDirection.Normalized * Speed * deltaTime;
 

@@ -54,9 +54,9 @@ namespace MathForGames
                     if (i < _actors.Length)
                     {
                         if (_actors[i].CheckForCollision(_actors[j]) && j != i)
-                            _actors[i].OnCollision(_actors[j], currentScene);
+                        _actors[i].OnCollision(_actors[j], currentScene);
                     }
-
+                    
                 }
             }
 
