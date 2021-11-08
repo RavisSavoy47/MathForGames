@@ -9,7 +9,9 @@ namespace MathForGames
     class Player : Actor
     {
         private float _speed;
-        private Vector2 _velocity;
+        private Vector3 _velocity;
+        private float _timer = 0;
+        private float _bulletDistance;
 
         public float Speed
         {
@@ -17,37 +19,89 @@ namespace MathForGames
             set { _speed = value; }
         }
 
-        public Vector2 Velocity
+        public Vector3 Velocity
         {
             get { return _velocity; }
             set { _velocity = value; }
         }
 
-        public Player(char icon, float x, float y, float speed, Color color, string name = "Player") 
-            : base(icon, x, y, color, name)
+        public Player(float x, float y, float z, float speed, string name = "Player", Shape shape = Shape.CUBE)
+            : base(x, y, z, name, shape)
         {
             _speed = speed;
         }
 
-        public override void Update(float deltaTime)
+        /// <summary>
+        /// Lets the player move and shoot bullets 
+        /// </summary>
+        /// <param name="deltaTime">The timer</param>
+        /// <param name="currentScene">Gets the currentScene from Scene</param>
+        public override void Update(float deltaTime, Scene currentScene)
         {
+            //The input for the player
             int xDirection = -Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_A))
                 + Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_D));
-            int yDirection = -Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_W))
+            int zDirection = -Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_W))
                 + Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_S));
 
-            Vector2 moveDirection = new Vector2(xDirection, yDirection);
+            //The input for bullet firing
+            int bulletDirectionX = -Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_LEFT))
+                + Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT));
+            int bulletDirectionZ = -Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_UP))
+                + Convert.ToInt32(Raylib.IsKeyDown(KeyboardKey.KEY_DOWN));
+
+            //Gives the bullets a cooldown timer
+            _timer += deltaTime;
+
+            if (bulletDirectionX != 0 && _timer >= .5 || bulletDirectionZ != 0 && _timer >= .5)
+            {
+                Bullet bullet = new Bullet(LocalPosition.X, LocalPosition.Y, LocalPosition.Z, bulletDirectionX, bulletDirectionZ, 10, "Bullet");
+                bullet.SetScale(1, 1, 1);
+                currentScene.AddActor(bullet);
+
+                SphereCollider bulletCollider = new SphereCollider(1, bullet);
+                bullet.Collider = bulletCollider;
+
+
+                _timer = 0;
+            }
+
+            //PLayer movement
+            Vector3 moveDirection = new Vector3(xDirection, 0, zDirection);
 
             Velocity = moveDirection.Normalized * Speed * deltaTime;
 
-            Position += Velocity;
+            if (Velocity.Magnitude > 0)
+                Forward = Velocity.Normalized;
 
-            base.Update(deltaTime);
+            LocalPosition += Velocity;
+
+            base.Update(deltaTime, currentScene);
+
         }
 
-        public override void OnCollision(Actor actor)
+        /// <summary>
+        /// Draws the collider draw
+        /// </summary>
+        public override void Draw()
         {
-            Console.WriteLine("Collision Occurred");
+            base.Draw();
+            Collider.Draw();
+        }
+
+        /// <summary>
+        /// Checks if the player collides with an enemy
+        /// </summary>
+        /// <param name="actor"></param>
+        /// <param name="currentScene"></param>
+        public override void OnCollision(Actor actor, Scene currentScene)
+        {
+            if (actor is Enemy)
+            {
+                //UIText DeathMessage = new UIText(500, 100, 1, "DeathMessage", Color.BLACK, 70, 70, 15, "You Died!!!");
+                //currentScene.AddUIElement(DeathMessage);
+                //currentScene.RemoveActor(this);
+            }
         }
     }
 }
