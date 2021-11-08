@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Diagnostics;
-using MathLibrary1;
+using MathLibrary;
 using Raylib_cs;
 
 namespace MathForGames
@@ -90,9 +90,9 @@ namespace MathForGames
             SphereCollider playerCollider = new SphereCollider(1, player);
             player.Collider = playerCollider;
 
-            //Player tankGun = new Player(1, 1, 4, 1, "planet", Shape.CUBE);
-            //tankGun.SetScale(1, 1, 1);
-            //player.AddChild(tankGun);
+            Player tankGun = new Player(1, 1, 4, 1, "planet", Shape.CUBE);
+            tankGun.SetScale(1, 1, 1);
+            player.AddChild(tankGun);
 
             Enemy enemy1 = new Enemy(5, 1, 5, 5, 100, 100, player, "Enemy", Shape.SPHERE);
             enemy1.SetScale(1, 1, 1);
@@ -101,20 +101,6 @@ namespace MathForGames
             SphereCollider enemy1Collider = new SphereCollider(1, enemy1);
             enemy1.Collider = enemy1Collider;
 
-            //enemy1.SetScale(50, 50);
-
-            //Player player = new Player(380, 400, 200, "Player", "Images/player.png");
-            //player.SetScale(50, 50);
-            //AABBCollider playerCollider = new AABBCollider(50, 50, player);
-            //player.Collider = playerCollider;
-
-            //Enemy enemy1 = new Enemy(300, 30, 200, 350, 2, player, "Enemy", "Images/enemy.png");
-            //enemy1.SetScale(50, 50);
-            //AABBCollider enemy1Collider = new AABBCollider(50, 50, enemy1);
-            //enemy1.Collider = enemy1Collider;
-
-            //scene.AddActor(player);
-            //scene.AddActor(enemy1);
 
             _currentSceneIndex = AddScene(scene);
             _scenes[_currentSceneIndex].Start();
